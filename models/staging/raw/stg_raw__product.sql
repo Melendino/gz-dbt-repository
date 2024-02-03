@@ -10,7 +10,7 @@ renamed as (
 
     select
         products_id,
-        purchase_price,
+        purchSE_PRICE as purchase_price,
 
     from source
 
