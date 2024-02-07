@@ -3,7 +3,7 @@ SELECT
   ,o.date_date
   ,o.quantity
   ,o.revenue
-  ,o.purchse_cost
+  ,o.purchase_cost
   ,o.margin
   ,s.shipping_fee
   ,s.logcost
