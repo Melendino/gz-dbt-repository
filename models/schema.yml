@@ -8,6 +8,8 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: primary key
+        columns:
+          - name: products_id
         tests: 
               - unique
               - not_null
