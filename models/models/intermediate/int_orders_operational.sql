@@ -1,7 +1,9 @@
-SELECT
+select *
+    from (
+        SELECT
   o.orders_id
   ,o.date_date
-  ,ROUND(o.margin + s.shipping_fee - (s.logcost + CAST(s.ship_cost AS FLOAT64)),2) AS operational_margin 
+  ,ROUND(CAST(o.margin AS FLOAT64) + CAST(s.shipping_fee AS FLOAT64) - (CAST(s.logcost AS FLOAT64) + CAST(s.ship_cost AS FLOAT64)), 2) AS operational_margin
   ,o.quantity
   ,o.revenue
   ,o.purchase_cost
@@ -9,7 +11,9 @@ SELECT
   ,s.shipping_fee
   ,s.logcost
   ,s.ship_cost
-FROM {{ref("int_orders_margin")}} o
-LEFT JOIN {{ref("stg_raw__ship")}} s 
-	USING(orders_id)
+FROM `edwin-big-query`.`dbt_emelendezperez`.`int_orders_margin` o
+LEFT JOIN `edwin-big-query`.`dbt_emelendezperez`.`stg_raw__ship` s 
+    USING(orders_id)
 ORDER BY orders_id desc
+    ) as model_limit_subq
+    limit 500
