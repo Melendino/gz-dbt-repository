@@ -1,3 +1,5 @@
+{{ config(
+    materialized='table') }}
 SELECT
     date_date
     ,COUNT(orders_id) AS nb_transactions
@@ -10,7 +12,8 @@ SELECT
     ,ROUND(SUM(shipping_fee),0) AS shipping_fee 
     ,ROUND(SUM(logcost),0) AS logcost 
     ,ROUND(SUM(CAST(ship_cost as FLOAT64)) ,0) AS ship_cost
-    ,SUM(quantity) AS quantity 
+    ,SUM(quantity) AS quantity
 FROM {{ref("int_orders_operational")}}
 GROUP BY  date_date
-ORDER BY  date_date DESC
+ORDER BY  date_date DESC 
+
